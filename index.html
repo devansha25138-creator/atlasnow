@@ -6,12 +6,12 @@
     <title>AtlasNow | The Global Explorer</title>
     <meta
       name="description"
-      content="AtlasNow is a fast country explorer built with Vanilla JavaScript and the REST Countries API."
+      content="AtlasNow is a polished country explorer built with Vanilla JavaScript and the REST Countries API."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -19,90 +19,201 @@
   <body>
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand" href="#">AtlasNow</a>
-        <span class="status-pill">Milestone 1 Ready</span>
+        <a class="brand" href="#top" aria-label="AtlasNow home">
+          <span class="brand-mark">AN</span>
+          <span class="brand-copy">
+            <strong>AtlasNow</strong>
+            <span>The Global Explorer</span>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <a
+            class="header-link"
+            href="https://restcountries.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            API Docs
+          </a>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-toggle__icon" aria-hidden="true"></span>
+            <span class="theme-toggle__label">Dark Mode</span>
+          </button>
+        </div>
       </header>
 
-      <main>
+      <main id="top">
         <section class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">Atlas Explorer Project</p>
-            <h1>Explore the world through a fast, modern country directory.</h1>
+            <p class="eyebrow">Single-page country explorer</p>
+            <h1>Explore 250+ countries with live data, thoughtful filters, and instant comparisons.</h1>
             <p class="hero-text">
-              This setup phase prepares AtlasNow for live API integration,
-              interactive country cards, smart filtering, and dark mode in the
-              next milestones.
+              AtlasNow turns the REST Countries API into a clean, fast directory for research,
+              browsing, and coursework demos. Search by name, narrow by region, sort by population,
+              and inspect detailed country profiles without leaving the page.
             </p>
+
             <div class="hero-actions">
-              <a class="button button-primary" href="#milestones">View Plan</a>
-              <a
-                class="button button-secondary"
-                href="https://restcountries.com/v3.1/all"
-                target="_blank"
-                rel="noreferrer"
-              >
-                REST Countries API
-              </a>
+              <a class="button button-primary" href="#explorer">Start Exploring</a>
+              <a class="button button-secondary" href="#details-panel">Country Details</a>
             </div>
           </div>
 
           <aside class="hero-panel">
-            <p class="panel-label">Project Snapshot</p>
-            <ul class="snapshot-list">
-              <li>Single-page app built with Vanilla JavaScript</li>
-              <li>Data source: REST Countries API v3.1</li>
-              <li>Search, filter, sort, and theme persistence planned</li>
-            </ul>
+            <p class="hero-panel__label">Live Dataset Snapshot</p>
+            <div class="stats-grid" id="stats-grid">
+              <article class="stat-card">
+                <span class="stat-card__value">250+</span>
+                <span class="stat-card__label">Countries</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-card__value">6</span>
+                <span class="stat-card__label">Regions</span>
+              </article>
+              <article class="stat-card">
+                <span class="stat-card__value">Ready</span>
+                <span class="stat-card__label">Theme Save</span>
+              </article>
+            </div>
+            <p class="hero-panel__note" id="dataset-note">
+              Data metrics update automatically after the API finishes loading.
+            </p>
           </aside>
         </section>
 
-        <section class="preview-panel" aria-labelledby="preview-title">
-          <div class="panel-heading">
-            <p class="eyebrow">Future Interface Preview</p>
-            <h2 id="preview-title">The dashboard structure is ready for Milestone 2.</h2>
+        <section class="explorer" id="explorer" aria-labelledby="explorer-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Explorer Workspace</p>
+              <h2 id="explorer-title">Browse the atlas</h2>
+            </div>
+            <p class="section-copy">
+              Filter the list in real time, then click any country to open a full profile with
+              borders, currencies, languages, and map links.
+            </p>
           </div>
 
-          <div class="controls-preview" aria-hidden="true">
-            <input type="text" placeholder="Search countries..." disabled />
-            <select disabled>
-              <option>Filter by region</option>
-            </select>
-            <select disabled>
-              <option>Sort countries</option>
-            </select>
+          <div class="control-bar">
+            <label class="control-field control-field--search">
+              <span class="control-label">Search countries</span>
+              <input
+                id="search-input"
+                type="search"
+                placeholder="Try India, Brazil, Kenya..."
+                autocomplete="off"
+              />
+            </label>
+
+            <label class="control-field">
+              <span class="control-label">Filter by region</span>
+              <select id="region-select">
+                <option value="all">All regions</option>
+              </select>
+            </label>
+
+            <label class="control-field">
+              <span class="control-label">Sort results</span>
+              <select id="sort-select">
+                <option value="population-desc">Highest population</option>
+                <option value="population-asc">Lowest population</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+              </select>
+            </label>
+
+            <button class="button button-tertiary" id="reset-button" type="button">
+              Reset
+            </button>
           </div>
 
-          <div class="country-grid-preview">
-            <article class="country-card-preview">
-              <div class="flag-block sunrise"></div>
-              <h3>Japan</h3>
-              <p>Population: 123,000,000</p>
-            </article>
-            <article class="country-card-preview">
-              <div class="flag-block tide"></div>
-              <h3>Brazil</h3>
-              <p>Population: 203,000,000</p>
-            </article>
-            <article class="country-card-preview">
-              <div class="flag-block dune"></div>
-              <h3>Morocco</h3>
-              <p>Population: 37,000,000</p>
-            </article>
+          <div class="results-toolbar">
+            <div>
+              <p class="results-count" id="results-count">Loading countries...</p>
+              <p class="results-subtitle" id="results-subtitle">
+                The explorer will populate as soon as the dataset is ready.
+              </p>
+            </div>
+            <div class="active-filters" id="active-filters" aria-live="polite"></div>
           </div>
-        </section>
 
-        <section class="milestones-section" id="milestones" aria-labelledby="milestones-title">
-          <div class="panel-heading">
-            <p class="eyebrow">Execution Plan</p>
-            <h2 id="milestones-title">Project roadmap</h2>
+          <div class="explorer-layout">
+            <section class="catalog-panel" aria-labelledby="catalog-title">
+              <div class="panel-headline">
+                <h3 id="catalog-title">Country directory</h3>
+                <span class="panel-meta" id="panel-meta">Preparing results</span>
+              </div>
+
+              <div class="loading-state" id="loading-state" aria-live="polite">
+                <div class="spinner" aria-hidden="true"></div>
+                <p>Loading countries from the REST Countries API...</p>
+              </div>
+
+              <div class="error-state" id="error-state" hidden>
+                <h4>Could not load country data</h4>
+                <p id="error-message">
+                  Something went wrong while contacting the API. Please try again.
+                </p>
+                <button class="button button-primary" id="retry-button" type="button">
+                  Try Again
+                </button>
+              </div>
+
+              <div class="empty-state" id="empty-state" hidden>
+                <h4>No countries match these filters</h4>
+                <p>Try clearing the search or choosing a different region.</p>
+              </div>
+
+              <div
+                class="country-grid"
+                id="country-grid"
+                role="list"
+                aria-live="polite"
+                aria-label="Country results"
+              ></div>
+            </section>
+
+            <aside class="details-panel" id="details-panel" aria-labelledby="details-title">
+              <div class="panel-headline">
+                <h3 id="details-title">Country profile</h3>
+                <span class="panel-meta" id="selection-meta">Awaiting selection</span>
+              </div>
+
+              <div class="details-placeholder" id="details-placeholder">
+                <div class="details-placeholder__art" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <h4>Select a country</h4>
+                <p>
+                  Choose a card from the directory to inspect its capital, languages, currencies,
+                  borders, time zones, and maps.
+                </p>
+              </div>
+
+              <article class="country-profile" id="country-profile" hidden></article>
+            </aside>
           </div>
-          <div class="milestone-grid" id="milestone-grid"></div>
         </section>
       </main>
 
       <footer class="site-footer">
-        <p>AtlasNow setup scaffold completed for Milestone 1.</p>
-        <p><span id="current-year"></span> Atlas Explorer coursework project.</p>
+        <div>
+          <p class="footer-title">AtlasNow</p>
+          <p class="footer-copy">
+            A Vanilla JavaScript country explorer powered by the REST Countries API.
+          </p>
+        </div>
+        <p class="footer-copy">
+          Built for coursework with live search, region filtering, sorting, and theme persistence.
+        </p>
       </footer>
     </div>
 

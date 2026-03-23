@@ -1,61 +1,45 @@
 # AtlasNow - The Global Explorer
 
-AtlasNow is a single-page web application built with HTML, CSS, and Vanilla JavaScript to help users explore data from 250+ countries in one place. The goal is to create a fast, visual country directory where users can search, filter, and sort nations using live data.
+AtlasNow is a polished single-page web application built with HTML, CSS, and Vanilla JavaScript. It helps users explore live data for 250+ countries through fast search, region filtering, population-based sorting, and a detailed country profile panel.
 
 ## Purpose
 
-This project is being developed as an Atlas Explorer coursework submission. It focuses on building a polished frontend experience while demonstrating practical JavaScript skills such as API handling, DOM updates, array higher-order functions, and local storage.
+This project was built as an Atlas Explorer coursework submission. The goal is to demonstrate:
 
-## API Link
+- API integration with `async/await`
+- DOM rendering with Vanilla JavaScript
+- responsive UI design
+- array higher-order functions in a practical app
+- `localStorage` for theme persistence
 
-- REST Countries API v3.1: [https://restcountries.com/v3.1/all](https://restcountries.com/v3.1/all)
+## Live Data Source
 
-## Planned Features
+- REST Countries API: [https://restcountries.com/](https://restcountries.com/)
+- Summary dataset used by the app:
+  [https://restcountries.com/v3.1/all?fields=name,cca3,capital,region,subregion,population,area,languages,flags](https://restcountries.com/v3.1/all?fields=name,cca3,capital,region,subregion,population,area,languages,flags)
+- Country detail endpoint used by the app:
+  `https://restcountries.com/v3.1/alpha/{code}`
 
-- Fetch country data with `async/await`
-- Render responsive country cards with flags, names, and population
-- Add a loading state while data is being fetched
-- Search countries by name using `.filter()`
-- Filter countries by geographic region using `.filter()`
-- Sort countries by population or alphabetically using `.sort()`
-- Use `.map()` to transform data for display
-- Use `.find()` for targeted country lookups, such as border-country details
-- Add a dark mode toggle with theme persistence using `localStorage`
-- Deploy the final app on GitHub Pages or Netlify
+## Features
 
-## Milestone Roadmap
+- Fetches live country data with `async/await`
+- Renders a responsive country card grid
+- Supports real-time search by country name, official name, or capital
+- Filters countries by region
+- Sorts countries by highest population, lowest population, or alphabetical order
+- Opens a detailed country profile with capital, subregion, population, area, currencies, languages, continents, time zones, border countries, and map links
+- Includes loading, empty, and error states
+- Includes a light/dark theme toggle
+- Saves theme preference to `localStorage`
 
-### Milestone 1 - Project Setup
+## Higher-Order Functions Used
 
-- Deadline: March 23
-- Create the initial project structure
-- Add the project README
-- Prepare `index.html`, `style.css`, and `app.js`
+- `.map()` to transform API data and render HTML
+- `.filter()` for search results and region filtering
+- `.sort()` for population and alphabetical ordering
+- `.find()` to resolve selected countries and bordering countries
 
-### Milestone 2 - API Integration
-
-- Deadline: April 1
-- Fetch live country data from the REST Countries API
-- Build country cards dynamically with JavaScript
-- Add a loading state
-- Make the layout responsive for mobile and laptop screens
-
-### Milestone 3 - Core Features
-
-- Deadline: April 8
-- Implement search functionality
-- Add region-based filtering
-- Add sorting options
-- Build and persist dark mode
-
-### Milestone 4 - Final Submission
-
-- Deadline: April 10
-- Refactor the code into clean modular functions
-- Finalize documentation
-- Deploy the site for sharing and submission
-
-## Current File Structure
+## Project Structure
 
 ```text
 .
@@ -65,6 +49,41 @@ This project is being developed as an Atlas Explorer coursework submission. It f
 `-- style.css
 ```
 
-## Milestone 1 Status
+## How to Run
 
-Milestone 1 is complete. The project scaffold is ready, the documentation is in place, and the app files are connected for the next phase of development.
+Because this project fetches live API data, run it through a local server instead of opening the HTML file directly.
+
+### Option 1: Python
+
+```bash
+python3 -m http.server 5500
+```
+
+Then open:
+
+```text
+http://localhost:5500
+```
+
+### Option 2: VS Code Live Server
+
+Open the folder in VS Code and launch the project with the Live Server extension.
+
+## Deployment
+
+This project is ready for static hosting.
+
+- GitHub Pages: upload the files to a repository and publish the root folder
+- Netlify: drag and drop the project folder or connect the repository
+
+No build step is required.
+
+## Notes
+
+The current REST Countries documentation requires `fields` when calling the `/v3.1/all` endpoint. To keep the app reliable with the live API, AtlasNow uses:
+
+- a lightweight `all?fields=...` request for the country directory
+- a separate `alpha/{code}` request for the full country profile
+- regional fallbacks if the summary endpoint is temporarily unavailable
+
+This keeps the UI fast and matches the current API behavior.
