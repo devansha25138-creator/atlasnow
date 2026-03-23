@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AtlasNow | The Global Explorer</title>
+    <meta
+      name="description"
+      content="AtlasNow is a fast country explorer built with Vanilla JavaScript and the REST Countries API."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#">AtlasNow</a>
+        <span class="status-pill">Milestone 1 Ready</span>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Atlas Explorer Project</p>
+            <h1>Explore the world through a fast, modern country directory.</h1>
+            <p class="hero-text">
+              This setup phase prepares AtlasNow for live API integration,
+              interactive country cards, smart filtering, and dark mode in the
+              next milestones.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#milestones">View Plan</a>
+              <a
+                class="button button-secondary"
+                href="https://restcountries.com/v3.1/all"
+                target="_blank"
+                rel="noreferrer"
+              >
+                REST Countries API
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <p class="panel-label">Project Snapshot</p>
+            <ul class="snapshot-list">
+              <li>Single-page app built with Vanilla JavaScript</li>
+              <li>Data source: REST Countries API v3.1</li>
+              <li>Search, filter, sort, and theme persistence planned</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="preview-panel" aria-labelledby="preview-title">
+          <div class="panel-heading">
+            <p class="eyebrow">Future Interface Preview</p>
+            <h2 id="preview-title">The dashboard structure is ready for Milestone 2.</h2>
+          </div>
+
+          <div class="controls-preview" aria-hidden="true">
+            <input type="text" placeholder="Search countries..." disabled />
+            <select disabled>
+              <option>Filter by region</option>
+            </select>
+            <select disabled>
+              <option>Sort countries</option>
+            </select>
+          </div>
+
+          <div class="country-grid-preview">
+            <article class="country-card-preview">
+              <div class="flag-block sunrise"></div>
+              <h3>Japan</h3>
+              <p>Population: 123,000,000</p>
+            </article>
+            <article class="country-card-preview">
+              <div class="flag-block tide"></div>
+              <h3>Brazil</h3>
+              <p>Population: 203,000,000</p>
+            </article>
+            <article class="country-card-preview">
+              <div class="flag-block dune"></div>
+              <h3>Morocco</h3>
+              <p>Population: 37,000,000</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="milestones-section" id="milestones" aria-labelledby="milestones-title">
+          <div class="panel-heading">
+            <p class="eyebrow">Execution Plan</p>
+            <h2 id="milestones-title">Project roadmap</h2>
+          </div>
+          <div class="milestone-grid" id="milestone-grid"></div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>AtlasNow setup scaffold completed for Milestone 1.</p>
+        <p><span id="current-year"></span> Atlas Explorer coursework project.</p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
